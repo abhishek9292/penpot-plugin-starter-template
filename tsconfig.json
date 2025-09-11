@@ -9,7 +9,7 @@
       "./node_modules/@types",
       "./node_modules/@penpot"
     ],
-    "types": ["plugin-types"],
+    "types": ["node","plugin-types"],
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
