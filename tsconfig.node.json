@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "types": ["node", "plugin-types"],
+    "noEmit": false,
+    "outDir": "dist-server"
+  },
+  "include": ["scripts/**/*", "src/server/**/*"]
+}

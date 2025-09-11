@@ -1,6 +1,21 @@
 {
-  "name": "Penpot starter plugin",
-  "code": "plugin.js",
-  "description": "This is a starter plugin for Penpot",
-  "permissions": ["content:read", "content:write"]
+  "name": "AI Design Generator",
+  "description": "Generate stunning designs automatically using AI (LM Studio integration)",
+  "version": "1.0.0",
+  "author": "Your Name",
+  "email": "your.email@example.com",
+  "license": "MIT",
+  "icon": "🎨",
+  "permissions": [
+    "content:read",
+    "content:write",
+    "library:read",
+    "library:write",
+    "user:read"
+  ],
+  "host": "https://design.penpot.app",
+  "code": "./plugin.js",
+  "ui": "./index.html",
+  "width": 420,
+  "height": 700
 }
