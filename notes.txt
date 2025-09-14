@@ -1,0 +1,8 @@
+npm install
+
+
+  npm run dev
+
+http://localhost:4400/manifest.json
+
+Create a interface where i can feed json to penpot to test generate shapes.

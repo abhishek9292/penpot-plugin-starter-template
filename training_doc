@@ -1,0 +1,117 @@
+You want your local model to turn plain text instructions (“create circle filled with green color”) into Penpot-compatible JSON shapes. That’s essentially a text-to-JSON generation problem.
+
+Here’s a step-by-step playbook to train such a model locally:
+
+1. Define the Target Format
+
+You already have a schema (your design_specification JSON). Lock this down as the single source of truth.
+
+Decide exactly which fields are mandatory (e.g., elementType, position, size, fill.color).
+
+Replace optional/complex parts (e.g., gradient, shadow) with defaults if not explicitly described.
+
+Keep examples minimal, consistent, and always valid JSON.
+
+2. Create Training Data
+
+Your model learns best from pairs:
+
+Input = natural language description
+
+Output = valid Penpot JSON object
+
+Example dataset entries:
+
+{
+  "input": "create circle filled with green color",
+  "output": {
+    "type": "design_specification",
+    "version": "1.0",
+    "elements": [
+      {
+        "elementType": "circle",
+        "id": "uuid-1234",
+        "name": "green circle",
+        "properties": {
+          "position": { "x": 100, "y": 100 },
+          "size": { "width": 150, "height": 150 },
+          "fill": { "type": "solid", "color": "#00FF00", "opacity": 1.0 },
+          "stroke": { "color": "#000000", "width": 0, "style": "solid" },
+          "cornerRadius": { "topLeft": 0, "topRight": 0, "bottomLeft": 0, "bottomRight": 0 },
+          "shadow": null
+        },
+        "children": []
+      }
+    ],
+    "metadata": {
+      "created": "2025-09-13T12:00:00Z",
+      "description": "circle filled with green color",
+      "artboardCount": 1,
+      "complexity": "simple"
+    }
+  }
+}
+
+
+Repeat this for many shapes:
+
+Rectangles (“a blue rectangle with black border”)
+
+Ellipses (“large ellipse at position x=200 y=300, red fill”)
+
+Text (“add text that says Hello World, size 24, color black”)
+
+Even 200–500 examples can get you decent results on a small local model.
+
+3. Choose a Local Model
+
+Options depending on your GPU (you said RTX 3060 12GB):
+
+Small LLMs like LLaMA 3.1-8B, Mistral 7B, Phi-3 small will fit fine.
+
+Run them via LM Studio, Ollama, or text-generation-webui.
+
+If you want more control, use LoRA fine-tuning to adapt them to your JSON-output task.
+
+4. Training / Fine-Tuning
+
+Two approaches:
+
+(a) Instruction-tuning with LoRA (recommended)
+
+Prepare your dataset in JSONL format:
+
+{"instruction": "create circle filled with green color", "output": "{...json...}"}
+{"instruction": "create rectangle filled with blue", "output": "{...json...}"}
+
+
+Use libraries like Axolotl or Unsloth for LoRA fine-tuning.
+
+(b) Prompt engineering + few-shot
+
+Skip training, just run your local model with a strong system prompt + few examples.
+Works if your model is smart enough and dataset small.
+
+5. Inference Setup
+
+When you query your model, always wrap requests with:
+
+“You are a Penpot JSON generator. Output only valid JSON for the following request: …”
+
+Then post-process:
+
+Validate with a JSON schema validator.
+
+Fill in missing defaults (UUID, timestamps).
+
+6. Deployment into Plugin
+
+Once the model outputs valid JSON:
+
+Send that JSON to your Penpot plugin via penpot.ui.postMessage.
+
+Your rasterizer/plugin can consume it to render shapes.
+
+⚡ Pro Tip: Start small. First, get it to reliably generate "elementType", "fill.color", and "size". Then gradually layer on advanced properties like gradients, shadows, groups.
+
+👉 Do you want me to draft you a ready-to-train JSONL dataset generator script (Node.js / Python) that will automatically create a bunch of training examples for circle/rectangle/text, so you don’t have to hand-write them?
