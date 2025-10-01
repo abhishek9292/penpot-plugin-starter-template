@@ -1,0 +1,15 @@
+<!-- public/shared/config-body.html -->
+<div id="config-root">
+  <h4 style="margin-top:0">Plugin Config</h4>
+  <div style="font-size:13px;color:var(--muted)">
+    Configure model endpoints, GPU/CPU preference and other runtime settings.
+  </div>
+  <table class="compact-table" style="margin-top:8px">
+    <tr><th>Option</th><th>Value</th></tr>
+    <tr><td>Model Endpoint</td><td><input id="cfg-endpoint" style="width:100%" placeholder="http://localhost:8000" /></td></tr>
+    <tr><td>Use GPU</td><td><input id="cfg-gpu" type="checkbox" /></td></tr>
+  </table>
+  <div style="margin-top:8px">
+    <button id="saveCfg" class="btn">Save</button>
+  </div>
+</div>

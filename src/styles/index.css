@@ -1,0 +1,9 @@
+:root { --icon-btn-size: 16px; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:10px; }
+    #connectionStatus { flex:1 1 auto; text-align:left; min-width:0; }
+    .tab-buttons { display:flex; gap:6px; align-items:center; flex:0 0 auto; }
+    .icon-btn { width:var(--icon-btn-size); height:var(--icon-btn-size); display:inline-flex; align-items:center; justify-content:center; border-radius:6px; border:1px solid var(--border); background:var(--input); cursor:pointer; font-size:14px; transition:transform .08s, box-shadow .08s; }
+    .icon-btn.active { background:linear-gradient(135deg,var(--primary),var(--primary-2)); color:#fff; box-shadow:0 6px 12px rgba(0,0,0,0.08); transform:translateY(-1px); }
+    #tabContent { margin-top:12px; padding:10px; border-radius:6px; border:1px solid var(--border); min-height:160px; background:var(--surface); }
+    .loading-indicator { display:inline-block; width:14px; height:14px; border:2px solid rgba(0,0,0,0.12); border-top-color:rgba(0,0,0,0.4); border-radius:50%; animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform:rotate(360deg); } }

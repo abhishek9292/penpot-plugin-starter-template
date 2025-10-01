@@ -1,76 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Design Generator</title>
-    <link rel="icon" href="/app.ico" > 
-    
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Penpot AI Assistance</title>
+  <link rel="icon" href="/app.ico" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="/src/styles/app.css" />
+  <link rel="stylesheet" href="/src/styles/index.css" />
+  
 </head>
 <body>
-    <div class="container">
-         
-
-        <div id="connectionStatus" class="connection-status disconnected">
-            🔴 Checking LM Studio connection...
-        </div>
-
-        <form id="designForm">
-            <div class="form-group">
-                <label for="designType">Design Type</label>
-                <select id="designType" name="designType" required>
-                    <option value="">Select design type...</option>
-                    <option value="landing-page">Landing Page</option>
-                    <option value="mobile-app">Mobile App Screen</option>
-                    <option value="dashboard">Dashboard</option>
-                    <option value="blog-post">Blog Post Layout</option>
-                    <option value="social-media">Social Media Post</option>
-                    <option value="business-card">Business Card</option>
-                    <option value="poster">Poster/Flyer</option>
-                    <option value="wireframe">Wireframe</option>
-                    <option value="custom" selected>Custom Layout</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="prompt">Describe your design</label>
-                <textarea 
-                    name=prompt 
-                    id="prompt" 
-                    placeholder="E.g., Create a modern landing page for a fitness app with a hero section, features, and call-to-action buttons. Use blue and white colors."
-                    required
-                ></textarea>
-            </div>
-
-            <button type="submit" id="generateBtn" class="btn">
-                Generate Design
-            </button>
-        </form>
-
-        <div id="status" class="status"></div>
-        <div id="raster-output"></div>
-        <div class="examples">
-            <h3>💡 Example Prompts</h3>
-            <div class="example-item" data-type="landing-page">
-                Modern SaaS landing page with hero section, pricing table, and testimonials
-            </div>
-            <div class="example-item" data-type="mobile-app">
-                E-commerce mobile app product detail screen with image gallery and buy button
-            </div>
-            <div class="example-item" data-type="dashboard">
-                Analytics dashboard with charts, KPI cards, and data tables
-            </div>
-            <div class="example-item" data-type="social-media">
-                Instagram post for a coffee shop with minimal design and warm colors
-            </div>
-            <div class="example-item" data-type="business-card">
-                Professional business card for a graphic designer with modern typography
-            </div>
-        </div>
+  <div class="container">
+    <div class="header">
+      <h1>Penpot AI Assistance</h1>
+      <p>Generate UI designs from prompts</p>
     </div>
- 
 
-<script type="module" src="/src/main.ts"></script>
+    <div class="topbar">
+      <div id="connectionStatus" class="connection-status disconnected">🔴 Checking connection...</div>
 
+      <div class="tab-buttons" role="tablist" aria-label="Pages">
+        <!-- NEW: design form page (icon-only) -->
+        <button class="icon-btn" id="btn-designPage" data-tab="designPage" aria-pressed="false" title="Design (Form)" type="button">
+          <i class="fa-solid fa-vector-square" aria-hidden="true"></i>
+        </button>
+
+        <!-- preview/output button (keeps previous semantics: show rendered output / preview) -->
+        <button class="icon-btn" id="btn-output" data-tab="output" aria-pressed="false" title="Design Output" type="button">
+          <i class="fa-solid fa-paint-roller" aria-hidden="true"></i>
+        </button>
+
+        <!-- config -->
+        <button class="icon-btn" id="btn-config" data-tab="config" aria-pressed="false" title="Config" type="button">
+          <i class="fa-solid fa-gear" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Tab content gets loaded from public/shared/*.html -->
+    <div id="tabContent" role="region" aria-label="Tab content">
+      <div id="tabHint">Loading default view…</div>
+    </div>
+
+    <div id="status" class="status" role="status" aria-live="polite" style="display:none"></div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <!-- <script type="module" src="/src/main.ts"></script> -->
+  <script src="/src/scripts/main.js"></script>
 </body>
 </html>

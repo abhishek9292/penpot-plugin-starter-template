@@ -1,0 +1,36 @@
+<!-- public/shared/design-body.html -->
+<div id="design-root">
+  <form id="designForm">
+    <div class="form-group">
+      <label for="designType">Design Type</label>
+      <select id="designType" name="designType" required>
+        <option value="">Select design type...</option>
+        <option value="landing-page">Landing Page</option>
+        <option value="mobile-app">Mobile App Screen</option>
+        <option value="dashboard">Dashboard</option>
+        <option value="blog-post">Blog Post Layout</option>
+        <option value="social-media">Social Media Post</option>
+        <option value="business-card">Business Card</option>
+        <option value="poster">Poster/Flyer</option>
+        <option value="wireframe">Wireframe</option>
+        <option value="custom" selected>Custom Layout</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="prompt">Describe your design</label>
+      <textarea name="prompt" id="prompt" placeholder="E.g., Create a modern landing page..." required></textarea>
+    </div>
+
+    <button type="submit" id="generateBtn" class="btn">Generate Design</button>
+  </form>
+
+  <div id="examples" class="examples" style="height:200px; overflow:auto; margin-top:12px;">
+    <h3>💡 Example Prompts</h3>
+    <div class="example-item" data-type="landing-page">Modern SaaS landing page with hero, pricing and testimonials</div>
+    <div class="example-item" data-type="mobile-app">E-commerce mobile app product detail with gallery</div>
+    <div class="example-item" data-type="dashboard">Analytics dashboard with charts and KPI cards</div>
+    <div class="example-item" data-type="social-media">Instagram post for coffee shop with warm colors</div>
+    <div class="example-item" data-type="business-card">Business card for a designer with modern typography</div>
+  </div>
+</div>
